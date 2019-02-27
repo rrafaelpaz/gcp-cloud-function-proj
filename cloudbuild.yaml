@@ -1,2 +1,3 @@
 steps:
-  - name: "gcr.io/cloud-builders/gcloud"
+  - name: gcr.io/cloud-builders/git
+    args: ["fetch", "--unshallow"]
