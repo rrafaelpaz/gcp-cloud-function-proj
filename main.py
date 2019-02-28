@@ -20,10 +20,8 @@ from flask import render_template, request, flash, redirect, url_for
 # [END imports]
 
 from flask import Flask
-from .config import Config
 
 app = Flask(__name__)
-app.config.from_object(Config)
 
 
 #app = Flask(__name__)
