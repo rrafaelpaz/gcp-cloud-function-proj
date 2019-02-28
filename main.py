@@ -30,7 +30,7 @@ app = Flask(__name__)
 
 # [START form]
 @app.route('/form')
-def form():
+def form(request):
     return render_template('form.html')
 # [END form]
 
