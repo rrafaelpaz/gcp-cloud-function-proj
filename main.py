@@ -19,7 +19,6 @@ import logging
 from flask import render_template, request, flash, redirect, url_for
 # [END imports]
 
-from .forms import LoginForm
 from flask import Flask
 from .config import Config
 
