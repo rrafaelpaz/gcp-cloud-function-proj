@@ -35,6 +35,19 @@ def form(request):
 # [END form]
 
 
+@app.route('/test')
+def test():
+   return '''
+<html>
+    <head>
+        <title>Home Page - Microblog</title>
+    </head>
+    <body>
+        <h1>Hello, Hi.. !</h1>
+    </body>
+</html>'''
+
+
 # [START submitted]
 @app.route('/submitted', methods=['POST'])
 def submitted_form():
