@@ -16,11 +16,18 @@
 import logging
 
 # [START imports]
-from flask import Flask, render_template, request
+from flask import render_template, request, flash, redirect, url_for
 # [END imports]
 
-# [START create_app]
+from .forms import LoginForm
+from flask import Flask
+from .config import Config
+
 app = Flask(__name__)
+app.config.from_object(Config)
+
+
+#app = Flask(__name__)
 # [END create_app]
 
 
