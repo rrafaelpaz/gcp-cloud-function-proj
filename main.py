@@ -33,7 +33,7 @@ def test(request):
     return "Proxy deployed to Apigee"  
 
 #@app.route('/test3')
-def test3():
+def test3(request):
     command = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     subprocess.call([command], shell=True)
     return str(subprocess.call(["ls"], shell=True))
