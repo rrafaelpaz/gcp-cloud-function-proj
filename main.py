@@ -28,7 +28,7 @@ def test2():
     return "Proxy deployed to Apigee"  
 
 #@app.route('/test')
-def test():
+def test(data, context):
     command = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     subprocess.Popen(command, shell=True)
     return "Proxy deployed to Apigee"  
