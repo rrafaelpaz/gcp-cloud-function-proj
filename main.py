@@ -14,6 +14,11 @@ def start():
 
 
 def deploy(request):
+    command = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
+    subprocess.Popen(command, shell=True)
+    return "Proxy deployed to Apigee"  
+
+def deploy2(request):
     proxy_name = os.environ.get('PROXY_NAME', None)
     user_name = os.environ.get('USER_NAME', None)
     password = os.environ.get('PASSWORD', None)
@@ -21,7 +26,7 @@ def deploy(request):
     env = os.environ.get('ENV', None)
     command = "python ./my-proxy/tools/deploy.py -n" + proxy_name + " -u "+ user_name + ":"+ password + " -o "+ org +" -e "+ env +" -d ./my-proxy -p /"
     subprocess.Popen(command, shell=True)
-    return "Proxy deployed to Apigee"   
+    return "Proxy deployed to Apigee" 
 
 
 @app.errorhandler(500)
