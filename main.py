@@ -1,6 +1,5 @@
 
 import logging
-import os
 import subprocess
 from subprocess import call
 from flask import Flask, render_template, request
@@ -12,8 +11,13 @@ app = Flask(__name__)
 def start():
     return "Function was triggered"
 
+@app.route('/deploy')
+def deploy():
+    return subprocess.check_output(["echo", "Hello World!"])    
 
-def deploy(request):
+
+@app.route('/test')
+def test(request):
     command = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     subprocess.Popen(command, shell=True)
     return "Proxy deployed to Apigee"  
