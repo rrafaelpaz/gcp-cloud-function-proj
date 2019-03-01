@@ -17,7 +17,7 @@ def deploy():
 
 
 #@app.route('/test2')
-def test2(data, context):
+def test2(request):
     cmd = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     # no block, it start a sub process.
     p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -28,7 +28,7 @@ def test2(data, context):
     return "Proxy deployed to Apigee"  
 
 #@app.route('/test')
-def test(data, context):
+def test(request):
     command = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     subprocess.Popen(command, shell=True)
     return "Proxy deployed to Apigee"  
