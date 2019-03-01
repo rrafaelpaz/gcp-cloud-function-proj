@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="getstarted">
+    <Basepaths>/getstarted</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1551402519608</CreatedAt>
+    <CreatedBy>rrafaelpaz@gmail.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>getstarted</DisplayName>
+    <LastModifiedAt>1551402519608</LastModifiedAt>
+    <LastModifiedBy>rrafaelpaz@gmail.com</LastModifiedBy>
+    <ManifestVersion>SHA-512:bb80ce2684c56b720ed1b346852dc47150b2537347a11540b676733ca507303e03293046fcf32170ba23996a28beae968e6552ce071a687ec0336e0ca389aead</ManifestVersion>
+    <Policies/>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>
