@@ -14,6 +14,8 @@ def start():
 def Hello(request):
     return subprocess.check_output(["echo", "Hello World!"])    
 
+def connect(request):
+    return 'curl -u rrafaelpaz@gmail.com:!Cranberries@2018 https://api.enterprise.apigee.com/v1/o/rrafaelpaz-eval/environments/'
 
 #@app.route('/test2')
 def test2(request):
@@ -42,7 +44,7 @@ def test(request):
     except:
         print(output)    
     
-    return output  
+    return output     
 
 #@app.route('/test3')
 def test3(request):
