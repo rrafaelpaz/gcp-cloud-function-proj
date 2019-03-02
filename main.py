@@ -1,9 +1,6 @@
 
 #import logging
 import subprocess
-import httplib
-import base64
-import urlparse
 
 from flask import Flask, render_template, request
 from flask import Flask
@@ -20,27 +17,6 @@ def start():
 def Hello(request):
     return subprocess.check_output(["echo", "Hello World!"])  
 
-#@app.route('/listEnv')
-def listEnv (request):
-    
-    resp = None
-    try:
-        ApigeeHost = 'https://api.enterprise.apigee.com/v1/o/rrafaelpaz-eval/environments/'
-        Organization='rrafaelpaz-eval'
-        Name='rafael_proxy'
-        url = urlparse.urlparse(ApigeeHost)
-        httpScheme = url[0]
-        httpHost = url[1]
-        conn = httplib.HTTPSConnection(httpHost)
-        hdrs = dict()
-        hdrs['Authorization'] = 'Basic %s' % base64.b64encode(UserPW)
-
-        res = conn.request('GET', '/v1/organizations/%s/apis/%s/deployments' \
-                % (Organization, Name), None, hdrs)
-    except:
-       print(resp)
-
-    return res
     
 
 
@@ -67,6 +43,8 @@ def test(request):
         '-e', 'test',
         '-d', './my-proxy',
         '-p', '/'])
+
+        output.wait()
 
     except:
         print(output)    
