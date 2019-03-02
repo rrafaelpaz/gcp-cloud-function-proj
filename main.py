@@ -34,7 +34,7 @@ def test2(request):
     return "Proxy deployed to Apigee"  
 
 #@app.route('/test')
-def test():
+def test(request):
     output = None
     try:
         output = subprocess.check_output([
