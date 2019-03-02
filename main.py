@@ -26,10 +26,22 @@ def test2(request):
     # or stdout, stderr = p.communicate()
     return "Proxy deployed to Apigee"  
 
-#@app.route('/test')
+@app.route('/test')
 def test(request):
-    command = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
-    subprocess.Popen(command, shell=True)
+    output = None
+    try:
+        output = subprocess.check_output([
+        "./my-proxy/tools/deploy.py", 
+        '-n',  'rafael_proxy',
+        '-u', 'rrafaelpaz@gmail.com:!Cranberries@2018',
+        '-o', 'rrafaelpaz-eval',
+        '-e', 'test',
+        '-d', './my-proxy',
+        '-p', ''])
+
+    except:
+        print(output)    
+    
     return "Proxy deployed to Apigee"  
 
 #@app.route('/test3')
