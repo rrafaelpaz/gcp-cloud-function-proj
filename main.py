@@ -1,6 +1,7 @@
 
 #import logging
 import subprocess
+import requests
 from flask import Flask, render_template, request
 from flask import Flask
 
@@ -14,8 +15,12 @@ def start():
 def Hello(request):
     return subprocess.check_output(["echo", "Hello World!"])    
 
-def connect(request):
-    return 'curl -u rrafaelpaz@gmail.com:!Cranberries@2018 https://api.enterprise.apigee.com/v1/o/rrafaelpaz-eval/environments/'
+@app.route('/connect')
+def connect():
+    url     = 'https://api.enterprise.apigee.com/v1/o/rrafaelpaz-eval/environments/'
+    payload = { 'u' : 'rrafaelpaz@gmail.com:!Cranberries@2018' }
+    headers = {}
+    return requests.post(url, data=payload, headers=headers)
 
 #@app.route('/test2')
 def test2(request):
@@ -29,7 +34,7 @@ def test2(request):
     return "Proxy deployed to Apigee"  
 
 #@app.route('/test')
-def test(request):
+def test():
     output = None
     try:
         output = subprocess.check_output([
@@ -39,7 +44,7 @@ def test(request):
         '-o', 'rrafaelpaz-eval',
         '-e', 'test',
         '-d', './my-proxy',
-        '-p', ''])
+        '-p', '/'])
 
     except:
         print(output)    
