@@ -11,7 +11,7 @@ def start():
     return "Function was triggered"
 
 #@app.route('/deploy')
-def deploy():
+def Hello(request):
     return subprocess.check_output(["echo", "Hello World!"])    
 
 
@@ -42,7 +42,7 @@ def test(request):
     except:
         print(output)    
     
-    return "Proxy deployed to Apigee"  
+    return output  
 
 #@app.route('/test3')
 def test3(request):
@@ -57,9 +57,8 @@ def deploy2():
     org = os.environ.get('ORG', None)
     env = os.environ.get('ENV', None)
     command = "python ./my-proxy/tools/deploy.py -n" + proxy_name + " -u "+ user_name + ":"+ password + " -o "+ org +" -e "+ env +" -d ./my-proxy -p /"
-    subprocess.Popen(command, shell=True)
-    return "Proxy deployed to Apigee" 
-
+    return subprocess.Popen(command, shell=True)
+    
 
 #@app.errorhandler(500)
 #def server_error(e):
