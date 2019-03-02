@@ -51,7 +51,7 @@ def test(request):
     
     return output     
 
-@app.route()
+#@app.route('/test3')
 def test3(request):
     cmd = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=False)
