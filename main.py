@@ -26,7 +26,7 @@ def test2(request):
     # or stdout, stderr = p.communicate()
     return "Proxy deployed to Apigee"  
 
-@app.route('/test')
+#@app.route('/test')
 def test(request):
     output = None
     try:
