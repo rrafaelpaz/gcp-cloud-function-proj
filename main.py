@@ -1,9 +1,14 @@
 
 #import logging
 import subprocess
-import requests
+import httplib
+import base64
+import urlparse
+
 from flask import Flask, render_template, request
 from flask import Flask
+
+
 
 app = Flask(__name__)
 
@@ -13,14 +18,31 @@ def start():
 
 #@app.route('/deploy')
 def Hello(request):
-    return subprocess.check_output(["echo", "Hello World!"])    
+    return subprocess.check_output(["echo", "Hello World!"])  
 
-@app.route('/connect')
-def connect():
-    url     = 'https://api.enterprise.apigee.com/v1/o/rrafaelpaz-eval/environments/'
-    payload = { 'u' : 'rrafaelpaz@gmail.com:!Cranberries@2018' }
-    headers = {}
-    return requests.post(url, data=payload, headers=headers)
+#@app.route('/listEnv')
+def listEnv (request):
+    
+    resp = None
+    try:
+        ApigeeHost = 'https://api.enterprise.apigee.com/v1/o/rrafaelpaz-eval/environments/'
+        Organization='rrafaelpaz-eval'
+        Name='rafael_proxy'
+        url = urlparse.urlparse(ApigeeHost)
+        httpScheme = url[0]
+        httpHost = url[1]
+        conn = httplib.HTTPSConnection(httpHost)
+        hdrs = dict()
+        hdrs['Authorization'] = 'Basic %s' % base64.b64encode(UserPW)
+
+        res = conn.request('GET', '/v1/organizations/%s/apis/%s/deployments' \
+                % (Organization, Name), None, hdrs)
+    except:
+       print(resp)
+
+    return res
+    
+
 
 #@app.route('/test2')
 def test2(request):
