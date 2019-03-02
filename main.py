@@ -51,12 +51,12 @@ def test(request):
     
     return output     
 
-#@app.route('/test3')
+@app.route()
 def test3(request):
-    command = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
-    subprocess.call([command], shell=True)
-    return str(subprocess.call(["ls"], shell=True))
-
+    cmd = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
+    p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=False)
+    #return subprocess.check_call(["./my-proxy/tools/deploy.py", 'rafael_proxy', 'rrafaelpaz@gmail.com:!Cranberries@2018', 'rrafaelpaz-eval', 'test', './my-proxy', '/' ])
+    return p
 def deploy2():
     proxy_name = os.environ.get('PROXY_NAME', None)
     user_name = os.environ.get('USER_NAME', None)
