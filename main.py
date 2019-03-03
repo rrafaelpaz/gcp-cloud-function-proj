@@ -53,7 +53,10 @@ def test(request):
     except:
         print(output)    
     
-    return output     
+    return output  
+
+def directoryApp():
+    return os.getcwd()
 
 #@app.route('/test3')
 def test3(request):
