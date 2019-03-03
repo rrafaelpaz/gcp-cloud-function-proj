@@ -35,14 +35,17 @@ def test2(request):
 #@app.route('/test')
 def test(request):
     output = None
+    cwd = os.getcwd() + "/my-proxy"
+    deploy = os.getcwd() + "/my-proxy/deploy.py"
+   
     try:
         output = subprocess.check_output([
-        "./my-proxy/tools/deploy.py", 
+        deploy, 
         '-n',  'rafael_proxy',
         '-u', 'rrafaelpaz@gmail.com:!Cranberries@2018',
         '-o', 'rrafaelpaz-eval',
         '-e', 'test',
-        '-d', './my-proxy',
+        '-d', cwd,
         '-p', '/'])
 
         output.wait()
@@ -55,7 +58,8 @@ def test(request):
 #@app.route('/test3')
 def test3(request):
     cwd = os.getcwd() + "/my-proxy"
-    cmd = "python deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d "+ cwd +" -p /"
+    deploy = os.getcwd() + "/my-proxy/deploy.py"
+    cmd = "python "+deploy+" -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d "+ cwd +" -p /"
     p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=False)
     output = b''.join(p.stdout).decode('utf-8')
     #return subprocess.check_call(["./my-proxy/tools/deploy.py", 'rafael_proxy', 'rrafaelpaz@gmail.com:!Cranberries@2018', 'rrafaelpaz-eval', 'test', './my-proxy', '/' ])
