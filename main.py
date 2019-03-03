@@ -65,6 +65,7 @@ def test3(request):
     deploy = os.getcwd() + "/my-proxy/deploy.py"
     cmd = "python "+deploy+" -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d "+ cwd +" -p /"
     p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=False)
+    out, err = p.communicate()
     output = b''.join(p.stdout).decode('utf-8')
     #return subprocess.check_call(["./my-proxy/tools/deploy.py", 'rafael_proxy', 'rrafaelpaz@gmail.com:!Cranberries@2018', 'rrafaelpaz-eval', 'test', './my-proxy', '/' ])
     return output
@@ -80,6 +81,19 @@ def send(request):
     except:
         print(output)
     return output
+
+#@app.route('/send')
+def send2():
+    p = None
+    try:
+        command = 'curl -X POST -u rrafaelpaz@gmail.com:!Cranberries@2018  -F "file=@apiproxy.zip" "https://api.enterprise.apigee.com/v1/organizations/rrafaelpaz-eval/apis?action=import&name=example"'
+        p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # and you can block util the cmd execute finish
+        p.wait()
+    except:
+        print(p)    
+    
+    return p    
     
 def deploy2():
     proxy_name = os.environ.get('PROXY_NAME', None)
