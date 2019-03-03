@@ -55,7 +55,8 @@ def test(request):
     
     return output  
 
-def directoryApp():
+
+def directoryApp(request):
     return os.getcwd()
 
 #@app.route('/test3')
