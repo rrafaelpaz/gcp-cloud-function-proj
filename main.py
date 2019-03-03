@@ -70,8 +70,8 @@ def test3(request):
     return output
 
     
-@app.route('/send')
-def send():
+#@app.route('/send')
+def send(request):
     command = 'curl -X POST -u rrafaelpaz@gmail.com:!Cranberries@2018  -F "file=@apiproxy.zip" "https://api.enterprise.apigee.com/v1/organizations/rrafaelpaz-eval/apis?action=import&name=example"'
     output=None
     try:
