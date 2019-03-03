@@ -68,6 +68,19 @@ def test3(request):
     output = b''.join(p.stdout).decode('utf-8')
     #return subprocess.check_call(["./my-proxy/tools/deploy.py", 'rafael_proxy', 'rrafaelpaz@gmail.com:!Cranberries@2018', 'rrafaelpaz-eval', 'test', './my-proxy', '/' ])
     return output
+
+    
+@app.route('/send')
+def send():
+    command = 'curl -X POST -u rrafaelpaz@gmail.com:!Cranberries@2018  -F "file=@apiproxy.zip" "https://api.enterprise.apigee.com/v1/organizations/rrafaelpaz-eval/apis?action=import&name=example"'
+    output=None
+    try:
+        output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = output.communicate()
+    except:
+        print(output)
+    return output
+    
 def deploy2():
     proxy_name = os.environ.get('PROXY_NAME', None)
     user_name = os.environ.get('USER_NAME', None)
