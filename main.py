@@ -53,7 +53,7 @@ def test(request):
 
 #@app.route('/test3')
 def test3(request):
-    cmd = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
+    cmd = "python deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=False)
     output = b''.join(p.stdout).decode('utf-8')
     #return subprocess.check_call(["./my-proxy/tools/deploy.py", 'rafael_proxy', 'rrafaelpaz@gmail.com:!Cranberries@2018', 'rrafaelpaz-eval', 'test', './my-proxy', '/' ])
