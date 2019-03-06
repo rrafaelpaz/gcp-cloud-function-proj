@@ -2,6 +2,7 @@
 #import logging
 import subprocess
 import os
+import time
 
 from flask import Flask, render_template, request
 from flask import Flask
@@ -23,7 +24,7 @@ def Hello(request):
 
 #@app.route('/test2')
 def test2(request):
-    cmd = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
+    cmd = "python ./my-proxy/tools/deploy.py -n rafael_proxy -u myEmail:myPassw -o rrafaelpaz-eval -e test -d ./my-proxy -p /"
     # no block, it start a sub process.
     p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -42,7 +43,7 @@ def test(request):
         output = subprocess.check_output([
         deploy, 
         '-n',  'rafael_proxy',
-        '-u', 'rrafaelpaz@gmail.com:!Cranberries@2018',
+        '-u', 'myEmail:myPassw',
         '-o', 'rrafaelpaz-eval',
         '-e', 'test',
         '-d', cwd,
@@ -63,17 +64,17 @@ def directoryApp(request):
 def test3(request):
     cwd = os.getcwd() + "/my-proxy"
     deploy = os.getcwd() + "/my-proxy/deploy.py"
-    cmd = "python "+deploy+" -n rafael_proxy -u rrafaelpaz@gmail.com:!Cranberries@2018 -o rrafaelpaz-eval -e test -d "+ cwd +" -p /"
+    cmd = "python "+deploy+" -n rafael_proxy -u myEmail:myPassw -o rrafaelpaz-eval -e test -d "+ cwd +" -p /"
     output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = output.communicate()
     output = b''.join(p.stdout).decode('utf-8')
-    #return subprocess.check_call(["./my-proxy/tools/deploy.py", 'rafael_proxy', 'rrafaelpaz@gmail.com:!Cranberries@2018', 'rrafaelpaz-eval', 'test', './my-proxy', '/' ])
+    #return subprocess.check_call(["./my-proxy/tools/deploy.py", 'rafael_proxy', 'myEmail:myPassw', 'rrafaelpaz-eval', 'test', './my-proxy', '/' ])
     return output
 
     
 #@app.route('/send')
 def send(request):
-    command = 'curl -X POST -u rrafaelpaz@gmail.com:!Cranberries@2018  -F "file=@apiproxy.zip" "https://api.enterprise.apigee.com/v1/organizations/rrafaelpaz-eval/apis?action=import&name=example"'
+    command = 'curl -X POST -u myEmail:myPassw  -F "file=@apiproxy.zip" "https://api.enterprise.apigee.com/v1/organizations/rrafaelpaz-eval/apis?action=import&name=example"'
     output=None
     try:
         output = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -82,11 +83,36 @@ def send(request):
         print(output)
     return output
 
+@app.route('/deploy2')
+def deploy2():
+    deploy_file = os.getcwd() + "/deploy.py"
+    deploy = os.getcwd() + "/my-proxy/deploy.py"
+
+    command = 'openapi2apigee generateApi petStore -s /Users/rafaelpaz/Documents/python/mapping-api_0.0.3.yml -d /Users/rafaelpaz/Documents/python -D'
+    output=None
+    try:
+        output = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        time.sleep(2.0)
+        subprocess.Popen.kill(output)
+        output = subprocess.check_output([
+        deploy_file, 
+        '-n', 'rafael_proxy',
+        '-u', 'myEmail:myPassw',
+        '-o', 'rrafaelpaz-eval',
+        '-e', 'test',
+        '-d', '/Users/rafaelpaz/Documents/python/petStore',
+        '-p', '/'])
+        output.wait()
+        
+    except:
+        print(output)
+    return output 
+
 #@app.route('/send')
 def send2():
     p = None
     try:
-        command = 'curl -X POST -u rrafaelpaz@gmail.com:!Cranberries@2018  -F "file=@apiproxy.zip" "https://api.enterprise.apigee.com/v1/organizations/rrafaelpaz-eval/apis?action=import&name=example"'
+        command = 'curl -X POST -u myEmail:myPassw  -F "file=@apiproxy.zip" "https://api.enterprise.apigee.com/v1/organizations/rrafaelpaz-eval/apis?action=import&name=example"'
         p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         # and you can block util the cmd execute finish
         p.wait()
